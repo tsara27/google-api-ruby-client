@@ -903,29 +903,29 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def create_file(file_object = nil, enforce_single_parent: nil, ignore_default_visibility: nil, include_permissions_for_view: nil, keep_revision_forever: nil, ocr_language: nil, supports_all_drives: nil, supports_team_drives: nil, use_content_as_indexable_text: nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil, &block)
-          if upload_source.nil?
-            command = make_simple_command(:post, 'files', options)
+        def create_file(file_object = nil, opts = {}, &block)
+          if opts[:upload_source].nil?
+            command = make_simple_command(:post, 'files', opts[:options])
           else
-            command = make_upload_command(:post, 'files', options)
-            command.upload_source = upload_source
-            command.upload_content_type = content_type
+            command = make_upload_command(:post, 'files', opts[:options])
+            command.upload_source = opts[:upload_source]
+            command.upload_content_type = opts[:content_type]
           end
           command.request_representation = Google::Apis::DriveV3::File::Representation
           command.request_object = file_object
           command.response_representation = Google::Apis::DriveV3::File::Representation
           command.response_class = Google::Apis::DriveV3::File
-          command.query['enforceSingleParent'] = enforce_single_parent unless enforce_single_parent.nil?
-          command.query['ignoreDefaultVisibility'] = ignore_default_visibility unless ignore_default_visibility.nil?
-          command.query['includePermissionsForView'] = include_permissions_for_view unless include_permissions_for_view.nil?
-          command.query['keepRevisionForever'] = keep_revision_forever unless keep_revision_forever.nil?
-          command.query['ocrLanguage'] = ocr_language unless ocr_language.nil?
-          command.query['supportsAllDrives'] = supports_all_drives unless supports_all_drives.nil?
-          command.query['supportsTeamDrives'] = supports_team_drives unless supports_team_drives.nil?
-          command.query['useContentAsIndexableText'] = use_content_as_indexable_text unless use_content_as_indexable_text.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
+          command.query['enforceSingleParent'] = opts[:enforce_single_parent] unless opts[:enforce_single_parent].nil?
+          command.query['ignoreDefaultVisibility'] = opts[:ignore_default_visibility] unless opts[:ignore_default_visibility].nil?
+          command.query['includePermissionsForView'] = opts[:include_permissions_for_view] unless opts[:include_permissions_for_view].nil?
+          command.query['keepRevisionForever'] = opts[:keep_revision_forever] unless opts[:keep_revision_forever].nil?
+          command.query['ocrLanguage'] = opts[:ocr_language] unless opts[:ocr_language].nil?
+          command.query['supportsAllDrives'] = opts[:supports_all_drives] unless opts[:supports_all_drives].nil?
+          command.query['supportsTeamDrives'] = opts[:supports_team_drives] unless opts[:supports_team_drives].nil?
+          command.query['useContentAsIndexableText'] = opts[:use_content_as_indexable_text] unless opts[:use_content_as_indexable_text].nil?
+          command.query['fields'] = opts[:fields] unless opts[:fields].nil?
+          command.query['quotaUser'] = opts[:quota_user] unless opts[:quota_user].nil?
+          command.query['userIp'] = opts[:user_ip] unless opts[:user_ip].nil?
           execute_or_queue_command(command, &block)
         end
         
@@ -1207,29 +1207,29 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_files(corpora: nil, corpus: nil, drive_id: nil, include_items_from_all_drives: nil, include_permissions_for_view: nil, include_team_drive_items: nil, order_by: nil, page_size: nil, page_token: nil, q: nil, spaces: nil, supports_all_drives: nil, supports_team_drives: nil, team_drive_id: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command = make_simple_command(:get, 'files', options)
+        def list_files(opts = {}, &block)
+          command = make_simple_command(:get, 'files', opts[:options])
           command.response_representation = Google::Apis::DriveV3::FileList::Representation
           command.response_class = Google::Apis::DriveV3::FileList
-          command.query['corpora'] = corpora unless corpora.nil?
-          command.query['corpus'] = corpus unless corpus.nil?
-          command.query['driveId'] = drive_id unless drive_id.nil?
-          command.query['includeItemsFromAllDrives'] = include_items_from_all_drives unless include_items_from_all_drives.nil?
-          command.query['includePermissionsForView'] = include_permissions_for_view unless include_permissions_for_view.nil?
-          command.query['includeTeamDriveItems'] = include_team_drive_items unless include_team_drive_items.nil?
-          command.query['orderBy'] = order_by unless order_by.nil?
-          command.query['pageSize'] = page_size unless page_size.nil?
-          command.query['pageToken'] = page_token unless page_token.nil?
-          command.query['q'] = q unless q.nil?
-          command.query['spaces'] = spaces unless spaces.nil?
-          command.query['supportsAllDrives'] = supports_all_drives unless supports_all_drives.nil?
-          command.query['supportsTeamDrives'] = supports_team_drives unless supports_team_drives.nil?
-          command.query['teamDriveId'] = team_drive_id unless team_drive_id.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
+          command.query['corpora'] = opts[:corpora] unless opts[:corpora].nil?
+          command.query['corpus'] = opts[:corpus] unless opts[:corpus].nil?
+          command.query['driveId'] = opts[:drive_id] unless opts[:drive_id].nil?
+          command.query['includeItemsFromAllDrives'] = opts[:include_items_from_all_drives] unless opts[:include_items_from_all_drives].nil?
+          command.query['includePermissionsForView'] = opts[:include_permissions_for_view] unless opts[:include_permissions_for_view].nil?
+          command.query['includeTeamDriveItems'] = opts[:include_team_drive_items] unless opts[:include_team_drive_items].nil?
+          command.query['orderBy'] = opts[:order_by] unless opts[:order_by].nil?
+          command.query['pageSize'] = opts[:page_size] unless opts[:page_size].nil?
+          command.query['pageToken'] = opts[:page_token] unless opts[:page_token].nil?
+          command.query['q'] = opts[:q] unless opts[:q].nil?
+          command.query['spaces'] = opts[:spaces] unless opts[:spaces].nil?
+          command.query['supportsAllDrives'] = opts[:supports_all_drives] unless opts[:supports_all_drives].nil?
+          command.query['supportsTeamDrives'] = opts[:supports_team_drives] unless opts[:supports_team_drives].nil?
+          command.query['teamDriveId'] = opts[:team_drive_id] unless opts[:team_drive_id].nil?
+          command.query['fields'] = opts[:fields] unless opts[:fields].nil?
+          command.query['quotaUser'] = opts[:quota_user] unless opts[:quota_user].nil?
+          command.query['userIp'] = opts[:user_ip] unless opts[:user_ip].nil?
           execute_or_queue_command(command, &block)
-        end
+        end 
         
         # Updates a file's metadata and/or content. When calling this method, only
         # populate fields in the request that you want to modify. When updating fields,
